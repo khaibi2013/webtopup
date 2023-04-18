@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Categories</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/test.css">
+    <script src="/test.js"></script>
+
+</head>
+<body id="body-pd">
+<header class="header" id="header">
+    <div class="header_toggle"><i class='bx bx-menu' id="header-toggle"></i></div>
+    <div class="header_img"><img src="https://i.imgur.com/hczKIze.jpg" alt=""></div>
+</header>
+<div class="l-navbar" id="nav-bar">
+    <nav class="nav">
+        <div>
+            <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">Greenwich</span>
+            </a>
+            <br>
+            <div class="nav_list">
+                <h4 class="nav_name nav_link" style="color: #dddddd"><i class='bx bx-body'></i> Admin</h4>
+                <a th:href="@{'/admin/dashboard'}" class="nav_link "> <i class='bx bx-grid-alt nav_icon'></i> <span
+                        class="nav_name">Dashboard</span> </a>
+                <a th:href="@{'/admin/showUser'}" class="nav_link"> <i
+                        class='bx bx-user nav_icon'></i> <span class="nav_name">Users</span> </a>
+                <a th:href="@{'/admin/showAllDepartment'}" class="nav_link "> <i
+                        class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Department</span> </a>
+                <h4 class="nav_name nav_link" style="color: #dddddd"><i class='bx bx-body'></i> QAM</h4>
+                <a th:href="@{'/QAM/showCategory'}" class="nav_link active"> <i class='bx bx-bookmark nav_icon'></i> <span
+                        class="nav_name">Creat Category</span> </a>
+                <a th:href="@{'/QAM/go_event'}" class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span
+                        class="nav_name">Creat Even</span> </a>
+                <h4 class="nav_name nav_link" style="color: #dddddd"><i class='bx bx-body'></i> User</h4>
+                <a th:href="@{'/user/my_idea'}" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span
+                        class="nav_name">My Idea</span> </a>
+
+            </div>
+            <a th:href="@{/logout}" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span>
+            </a>
+        </div>
+    </nav>
+</div>
+<div class="height-100" style="width: 100%">
+    <h4><small>Category</small></h4>
+    <hr>
+    <div style="width: 100%;text-align: right;">
+        <a th:href="@{'/QAM/go_category'}" class="btn btn-outline-secondary" role="button" aria-pressed="true"><span
+                style="color: coral;"> <i class='bx bx-plus'> Create Category</i> </span></a>
+    </div>
+    <table class="table mt-3">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">View Idea </th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="c : ${categories}">
+            <td th:text="${c.id}"></td>
+            <td th:text="${c.nameCategory}"></td>
+            <td ><a th:href="@{'/show_idea_category/?id='+ ${c.id}}" class="btn btn-outline-secondary" role="button" aria-pressed="true" ><span style="color: #ea0808">View Idea</span></a></td>
+            <td ><a th:href="@{'/QAM/editCategory/?id='+ ${c.id}}" class="btn btn-outline-secondary text-bg-primary" role="button" aria-pressed="true" ><span style="color: #ffffff">Edit Category</span></a></td>
+
+            <td ><a th:href="@{'/QAM/delete/?id='+ ${c.id}}" class="btn btn-outline-secondary text-bg-danger" role="button" aria-pressed="true" ><span style="color: #ffffff">Delete Category</span></a></td>
+
+
+
+            <!--        <td th:each="de : ${c.departments}"  >-->
+            <!--&lt;!&ndash;            <p th:text="${de.id}"></p>&ndash;&gt;-->
+            <!--&lt;!&ndash;            <p th:text="${de.nameDepartment}"></p>&ndash;&gt;-->
+            <!--        <p> <a th:href="@{'/user/show_idea/?id='+ ${de.id}}" class="btn btn-outline-secondary" role="button" aria-pressed="true" ><span style="color: coral">Show Idea</span></a></td> </p>-->
+
+            <!--        </td>-->
+
+        </tr>
+        </tbody>
+
+    </table>
+</div>
+
+
+
+
+</body>
+</html>

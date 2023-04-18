@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Event</title>
+</head>
+<body>
+
+<div>
+
+    <div style="margin: auto; max-width: 30%" >
+        <h1 style=" color: coral;  padding-top: 30px;padding-bottom: 50px" >Edit Department</h1>
+
+        <form th:action="@{/admin/update_event}" th:object="${event}" method="post" >
+            <input id="id" hidden  th:field="*{id}"/>
+
+            <dl class="row">
+                <dt class="col-sm-3">Name Event :</dt>
+
+                <input id="nameEvent"  th:field="*{nameEvent}"/>
+            </dl>
+
+            <dl class="row">
+                <dt class="col-sm-3">due Date :</dt>
+
+                <input id="dueDate"  th:field="*{dueDate}"/>
+            </dl>
+
+            <dl class="row">
+                <dt class="col-sm-3">due Time :</dt>
+
+                <input id="dueTime"  th:field="*{dueTime}"/>
+            </dl>
+
+
+            <button type="submit">Edit</button>
+
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

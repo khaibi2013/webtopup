@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Title</title>
+</head>
+<body>
+<div>
+
+    <div style="margin: auto; max-width: 30%" >
+        <h1 style=" color: coral;  padding-top: 30px;padding-bottom: 50px" >Edit Comment</h1>
+
+        <form th:action="@{/user/go_edit/(ids=${#request.getParameter('ids')})}" th:object="${comment}" method="post" >
+            <input id="id" hidden  th:field="*{id}"/>
+            <dl class="row">
+                <dt class="col-sm-3">Content :</dt>
+
+                <input id="content"  th:field="*{content}"/>
+            </dl>
+
+            <dl class="row">
+                <input id="email" hidden th:field="*{email}"/>
+            </dl>
+
+            <dl class="row">
+                <input id="idea" hidden th:field="*{idea}"/>
+            </dl>
+
+
+
+            <button type="submit">Edit</button>
+
+        </form>
+    </div>
+
+
+
+
+
+
+</div>
+
+
+
+
+</body>
+</html>

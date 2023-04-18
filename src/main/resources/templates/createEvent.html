@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Create Category</title>
+    <script src="/event.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="/css/createIdea.css">
+    <!-- Font Awesome -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+            rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+            rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
+            rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/test.css">
+    <script src="/test.js"></script>
+</head>
+<body id="body-pd">
+<header class="header" id="header">
+    <div class="header_toggle"><i class='bx bx-menu' id="header-toggle"></i></div>
+    <div class="header_img"><img src="https://i.imgur.com/hczKIze.jpg" alt=""></div>
+</header>
+<div class="l-navbar" id="nav-bar">
+    <nav class="nav">
+        <div>
+            <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">Greenwich</span>
+            </a>
+            <br>
+            <div class="nav_list">
+                <h4 class="nav_name nav_link" style="color: #dddddd"><i class='bx bx-body'></i> Admin</h4>
+                <a th:href="@{'/admin/dashboard'}" class="nav_link "> <i class='bx bx-grid-alt nav_icon'></i> <span
+                        class="nav_name">Dashboard</span> </a>
+                <a th:href="@{'/admin/showUser'}" class="nav_link"> <i
+                        class='bx bx-user nav_icon'></i> <span class="nav_name">Users</span> </a>
+                <a th:href="@{'/admin/showAllDepartment'}" class="nav_link "> <i
+                        class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Department</span> </a>
+                <h4 class="nav_name nav_link" style="color: #dddddd"><i class='bx bx-body'></i> QAM</h4>
+                <a th:href="@{'/QAM/showCategory'}" class="nav_link "> <i class='bx bx-bookmark nav_icon'></i> <span
+                        class="nav_name">Creat Category</span> </a>
+                <a th:href="@{'/QAM/go_event'}" class="nav_link active"> <i class='bx bx-folder nav_icon'></i> <span
+                        class="nav_name">Creat Even</span> </a>
+                <h4 class="nav_name nav_link" style="color: #dddddd"><i class='bx bx-body'></i> User</h4>
+                <a th:href="@{'/user/my_idea'}" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span
+                        class="nav_name">My Idea</span> </a>
+
+            </div>
+            <a th:href="@{/logout}" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span>
+            </a>
+        </div>
+    </nav>
+</div>
+<h4><small>Create Evens</small></h4>
+<hr>
+<section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-12 col-lg-9 col-xl-7">
+                <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                    <div class="card-body p-4 p-md-5">
+                        <form th:method="post" th:action="@{/QAM/create_event}" th:object="${event}"
+                              onSubmit="checkForm(this); return false; " id="ok">
+                            <div class="row">
+                                <div class="col span-6">
+                                    <label class="col-form-label col-4" style="color: #333333">Name</label>
+                                    <div class="col-8">
+                                        <input id="valname" type="text" class="form-control" name="nameEvent" />
+                                    </div>
+                                </div>
+                                <div class="col span-6">
+                                    <legend>Event Details</legend>
+                                    <div class="mt-3">
+                                        <label>Start Date</label>
+                                        <span><input type="date" size="12" name="startDate" /></span>
+                                    </div>
+                                    <div class="mt-3">
+                                        <label>Start Time</label>
+                                        <span><input type="time" size="12" name="dueTime" /></span>
+                                    </div>
+                                    <div class="mt-3">
+                                        <label>End Date</label>
+                                        <span><input type="date" size="12" name="dueDate" /></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <span><input type="submit" /></span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function checkForm(form) {
+        // regular expression to match required date format
+
+        if (form.startDate.value == "") {
+            alert("ko dc để rỗng");
+            return false;
+        }
+
+        if (form.dueDate.value == "") {
+            alert("ko dc để rỗng");
+            return false;
+        }
+
+        // regular expression to match required time format
+        re = /^(\d{1,2}):(\d{2})([ap]m)?$/;
+
+        if (form.dueTime.value != "") {
+            let d = new Date();
+            let date =
+                d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+            let now = new Date(date);
+            let know = new Date(form.startDate.value);
+            let d2 = new Date(know.toLocaleString().split(",")[0]);
+
+            if (now > d2) {
+                alert("ngay bat dau can lon hon ngay hien tai");
+                return false;
+            }
+
+            if ((regs = form.dueTime.value.match(re))) {
+                if (regs[3]) {
+                    if (regs[1] < 1 || regs[1] > 12) {
+                        alert("Invalid value for hours: " + regs[1]);
+                        form.dueTime.focus();
+                        return false;
+                    }
+                } else {
+                    if (regs[1] > 23) {
+                        alert("Invalid value for hours: " + regs[1]);
+                        form.dueTime.focus();
+                        return false;
+                    }
+                }
+                if (regs[2] > 59) {
+                    alert("Invalid value for minutes: " + regs[2]);
+                    form.dueTime.focus();
+                    return false;
+                }
+            } else {
+                alert("Invalid time format: " + form.dueTime.value);
+                form.dueTime.focus();
+                return false;
+            }
+        }
+
+        if (form.startDate.value > form.dueDate.value) {
+            alert("sai rồi thời gian phải lớn hơn");
+            form.dueDate.focus();
+            return false;
+        }
+        document.getElementById("ok").submit();
+        return true;
+
+
+
+
+
+    }
+</script>
+
+</body>
+</html>
