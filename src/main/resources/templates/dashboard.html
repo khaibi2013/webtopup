@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Bootstrap Example</title>
     <meta charset="utf-8">
@@ -30,7 +30,7 @@
             ]);
 
             var options = {
-                title: 'My Daily Activities'
+                title: 'Idea chart by month'
             };
 
             var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -38,39 +38,6 @@
             chart.draw(data, options);
         }
     </script>
-<!--    <script type="text/javascript">-->
-<!--        google.charts.load('current', {packages: ['corechart', 'bar']});-->
-<!--        google.charts.setOnLoadCallback(drawBasic);-->
-
-<!--        function drawBasic() {-->
-
-<!--            var data = google.visualization.arrayToDataTable([-->
-<!--                ['City', '2010 Population',sss],-->
-<!--                ['New York City, NY', 8175000],-->
-<!--                ['Los Angeles, CA', 3792000],-->
-<!--                ['Chicago, IL', 2695000],-->
-<!--                ['Houston, TX', 2099000],-->
-<!--                ['Philadelphia, PA', 1526000]-->
-<!--            ]);-->
-
-<!--            var options = {-->
-<!--                title: 'Population of Largest U.S. Cities',-->
-<!--                chartArea: {width: '50%'},-->
-<!--                hAxis: {-->
-<!--                    title: 'Total Population',-->
-<!--                    minValue: 0-->
-<!--                },-->
-<!--                vAxis: {-->
-<!--                    title: 'City'-->
-<!--                }-->
-<!--            };-->
-
-<!--            var chart = new google.visualization.BarChart(document.getElementById('chart_div'));-->
-
-<!--            chart.draw(data, options);-->
-<!--        }-->
-<!--    </script>-->
-
 </head>
 <body id="body-pd">
 <header class="header" id="header">
@@ -84,21 +51,27 @@
             </a>
             <br>
             <div class="nav_list">
-                <h4 class="nav_name nav_link" style="color: #dddddd"><i class='bx bx-body'></i> Admin</h4>
-                <a th:href="@{'/admin/dashboard'}" class="nav_link "> <i class='bx bx-grid-alt nav_icon'></i> <span
-                        class="nav_name">Dashboard</span> </a>
-                <a th:href="@{'/admin/showUser'}" class="nav_link"> <i
-                        class='bx bx-user nav_icon'></i> <span class="nav_name">Users</span> </a>
-                <a th:href="@{'/admin/showAllDepartment'}" class="nav_link active"> <i
-                        class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Department</span> </a>
-                <h4 class="nav_name nav_link" style="color: #dddddd"><i class='bx bx-body'></i> QAM</h4>
-                <a th:href="@{'/QAM/showCategory'}" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span
-                        class="nav_name">Creat Category</span> </a>
-                <a th:href="@{'/QAM/go_event'}" class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span
-                        class="nav_name">Creat Even</span> </a>
-                <h4 class="nav_name nav_link" style="color: #dddddd"><i class='bx bx-body'></i> User</h4>
-                <a th:href="@{'/user/my_idea'}" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span
-                        class="nav_name">My Idea</span> </a>
+                <div sec:authorize="hasAuthority('admin')">
+                    <h4 class="nav_name nav_link" style="color: #dddddd"><i class='bx bx-body'></i> Admin</h4>
+                    <a th:href="@{'/admin/dashboard'}" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i> <span
+                            class="nav_name">Dashboard</span> </a>
+                    <a th:href="@{'/admin/showUser'}" class="nav_link "> <i
+                            class='bx bx-user nav_icon'></i> <span class="nav_name">Users</span> </a>
+                    <a th:href="@{'/admin/showAllDepartment'}" class="nav_link "> <i
+                            class='bx bx-message-square-detail '></i> <span class="nav_name">Department</span> </a>
+                </div>
+                <div sec:authorize="hasAuthority('QAM')">
+                    <h4 class="nav_name nav_link" style="color: #dddddd"><i class='bx bx-body'></i> QAM</h4>
+                    <a th:href="@{'/QAM/showCategory'}" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span
+                            class="nav_name">Creat Category</span> </a>
+                    <a th:href="@{'/QAM/go_event'}" class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Creat Even</span> </a>
+                </div>
+                <div sec:authorize="hasAuthority('user')">
+                    <h4 class="nav_name nav_link" style="color: #dddddd"><i class='bx bx-body'></i> User</h4>
+                    <a th:href="@{'/user/my_idea'}" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">My Idea</span> </a>
+                </div>
+
+                <a th:href="@{'/showEvent'}" class="nav_link "> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Event</span> </a>
 
             </div>
             <a th:href="@{/logout}" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span>
@@ -116,9 +89,8 @@
     </div><br>
     <hr>
     <div class="col-sm-12">
-        <div class="row" style="display: flex!important;">
-            <div class="col-sm-6" id="piechart" style="width: 500px; height: 400px;"></div>
-            <div class="col-sm-6" id="chart_div" style="width: 900px; height: 400px;"></div>
+        <div id="piechart" style="width: 700px; height: 600px;">
+<!--            <div class="col-sm-6" id="chart_div" style="width: 900px; height: 400px;"></div>-->
         </div>
     </div>
 </div>

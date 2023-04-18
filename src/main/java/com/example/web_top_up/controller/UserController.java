@@ -30,7 +30,7 @@ public class UserController {
     private DepartmentService departmentService;
 
 
-    @GetMapping("/register")
+    @GetMapping("/admin/register")
     public String userSignUp(Model model){
 
         List<DepartmentEntity> listDepartment = departmentService.findAllDepartment();
@@ -49,10 +49,10 @@ public class UserController {
 
         UserEntity userEmail = userService.findByEmail(userForm.getEmail());
         if (userEmail != null){
-            bindingResult.addError(new FieldError("user", "email","Trùng email rồi "));
+            bindingResult.addError(new FieldError("user", "email","Email already used "));
             return "register";
         } else if (!userForm.getPassword().equals(userForm.getConfirm())) {
-            bindingResult.addError(new FieldError("user", "password","Trùng Password rồi"));
+            bindingResult.addError(new FieldError("user", "password","same password"));
             return "register";
         }
 
@@ -67,7 +67,7 @@ public class UserController {
 
     @RequestMapping(value = "/403", method = RequestMethod.GET)
     public String accessDenied(Model model){
-        String errorRole = "Xin lỗi bạn yêu, bạn không đủ tư cách :((";
+        String errorRole = "you have no right";
         model.addAttribute("msg",errorRole);
         return "haventRole";
     }

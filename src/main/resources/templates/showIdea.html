@@ -24,19 +24,27 @@
             <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">Greenwich</span>
             </a>
             <div class="nav_list">
-                <h4 class="nav_name nav_link" style="color: #dddddd"><i class='bx bx-body'></i> Admin</h4>
-                <a th:href="@{'/admin/dashboard'}" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i> <span
-                        class="nav_name">Dashboard</span> </a>
-                <a th:href="@{'/admin/showUser'}" class="nav_link"> <i
-                        class='bx bx-user nav_icon'></i> <span class="nav_name">Users</span> </a>
-                <a th:href="@{'/admin/showAllDepartment'}" class="nav_link"> <i
-                        class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Department</span> </a>
-                <h4 class="nav_name nav_link" style="color: #dddddd"><i class='bx bx-body'></i> QAM</h4>
-                <a th:href="@{'/QAM/showCategory'}" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span
-                        class="nav_name">Creat Category</span> </a>
-                <a th:href="@{'/QAM/go_event'}" class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Creat Even</span> </a>
-                <h4 class="nav_name nav_link" style="color: #dddddd"><i class='bx bx-body'></i> User</h4>
-                <a th:href="@{'/user/my_idea'}" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">My Idea</span> </a>
+                <div sec:authorize="hasAuthority('admin')">
+                    <h4 class="nav_name nav_link" style="color: #dddddd"><i class='bx bx-body'></i> Admin</h4>
+                    <a th:href="@{'/admin/dashboard'}" class="nav_link "> <i class='bx bx-grid-alt nav_icon'></i> <span
+                            class="nav_name">Dashboard</span> </a>
+                    <a th:href="@{'/admin/showUser'}" class="nav_link"> <i
+                            class='bx bx-user nav_icon'></i> <span class="nav_name">Users</span> </a>
+                    <a th:href="@{'/admin/showAllDepartment'}" class="nav_link"> <i
+                            class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Department</span> </a>
+                </div>
+                <div sec:authorize="hasAuthority('QAM')">
+                    <h4 class="nav_name nav_link" style="color: #dddddd"><i class='bx bx-body'></i> QAM</h4>
+                    <a th:href="@{'/QAM/showCategory'}" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span
+                            class="nav_name">Creat Category</span> </a>
+                    <a th:href="@{'/QAM/go_event'}" class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Creat Even</span> </a>
+                </div>
+                <div sec:authorize="hasAuthority('user')">
+                    <h4 class="nav_name nav_link" style="color: #dddddd"><i class='bx bx-body'></i> User</h4>
+                    <a th:href="@{'/user/my_idea'}" class="nav_link "> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">My Idea</span> </a>
+                </div>
+
+                <a th:href="@{'/showEvent'}" class="nav_link active"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Event</span> </a>
 
             </div>
             <a th:href="@{/logout}" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
@@ -46,10 +54,19 @@
 <!--Container Main start-->
 <div class="height-100 bg-light">
     <div class="col-sm-12">
-        <h4><small>Ideas</small></h4>
-        <a th:href="@{/filterByLikeAndDislike/(id=${#request.getParameter('id')})}" class="btn btn-outline-secondary" role="button" aria-pressed="true" ><span style="color: coral">Filter Feeling  </span></a>
-        <a th:href="@{/user/go_createIdea/(id=${#request.getParameter('id')})}" class="btn btn-outline-secondary"
-           role="button" aria-pressed="true"><span style="color: coral">Create Idea </span></a>
+        <div style="display: flex">
+            <input action="action" onclick="window.history.go(-1); return false;" type="button" value="Cancel" style="font-size: 18px!important;height: 29px;padding-top: 1px;margin-right: 5px;margin-top: 0px;">
+            <h4><small>Idea</small></h4>
+        </div>
+        <hr>
+        <div style="display: flex!important;">
+            <a th:href="@{/filterByLikeAndDislike/(id=${#request.getParameter('id')})}" class="btn btn-outline-secondary" role="button" aria-pressed="true" ><span style="color: coral">Filter Feeling  </span></a>
+            <br>
+            <div sec:authorize="hasAuthority('user')">
+            <a th:href="@{/user/go_createIdea/(id=${#request.getParameter('id')})}" class="btn btn-outline-secondary"
+               role="button" aria-pressed="true"><span style="color: coral">Create Idea </span></a>
+            </div>
+        </div>
         <hr>
         <div th:each="i : ${ideas}">
             <h2><a th:href="@{'/detail_Idea/?id='+ ${i.id}}" th:text="${i.title}"></a></h2>
