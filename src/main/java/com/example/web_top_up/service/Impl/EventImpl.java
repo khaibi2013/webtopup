@@ -30,7 +30,7 @@ public class EventImpl implements EventService {
 
     @Override
     public EventEntity createEvent(EventForm eventForm) {
-        Calendar calendar = Calendar.getInstance();
+
         EventEntity categoryEntity = new EventEntity();
         if(eventForm.getId() !=null){
             categoryEntity.setId(eventForm.getId());

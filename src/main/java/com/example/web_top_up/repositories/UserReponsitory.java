@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface UserReponsitory extends JpaRepository<UserEntity,Long> {
 
-
     @Query("SELECT u FROM UserEntity u WHERE u.email = ?1")
     UserEntity findByEmail(String email);
 

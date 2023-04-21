@@ -56,7 +56,7 @@ public class EventController {
     }
 
     @PostMapping("/QAM/create_event")
-    public String createCategory(@ModelAttribute("event") EventForm eventForm) {
+    public String createEvent(@ModelAttribute("event") EventForm eventForm) {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.format(eventForm.getStartDate());
         dateFormat.format(eventForm.getDueDate());

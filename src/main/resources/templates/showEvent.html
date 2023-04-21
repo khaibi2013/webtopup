@@ -71,10 +71,13 @@
             <h2 > <a th:href="@{'/show_idea/?id='+ ${e.id}}" th:text="${e.nameEvent}"></a></h2>
             <h6><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAZJJREFUSEvFlu0xRUEMhp9bASqgA1SADnSAClABKqAEKkAHVIAO6IAKmNec3dm7sx/JXubszPlzb5InyWaTLJjpLGbiMgLeAjaB/cnpd0DfG/BpDcQKXgdOgWNA4Np5APTd9RywgC8nqODW8wScA681hRZYoOspSiswlzsBbkvKLbC83R4lJnpFeA0sL4860KvpfxXZXkf2AFD64ymBD4F7Q6RBVzVw0ZFX1e+mVV8CS0jPpXc8YNlShuTk78nB1mhTXUvEktcb36iBLXeb61rB0ot3nUcsr9Z6Oc6y5QHHdOfgbyM0TbW6mb78hNaa/v4I6DqX7ngHeBkA11RKmXgOPT6NeDawPPekeqkhVFKdD5RiqkPJW4vLcStRtFpcnuc0Aq4+J08D8YK/gDhaV2mZXnCzZcrYf0T9AejVxNVolbHoidg0FoPBWRYBwVUIN4aFoBX50OoTDKr1nTmGh/TUGqUztOylkSh6GdIwaC0J6kxab4sLXmrQst6Wpo5aYb7QK7o/X+g9FWySHYnYZLgn9AMPiEgfP/Q1PAAAAABJRU5ErkJggg=="/>Start day: <span th:text="${#dates.format(e.getStartDate(), 'dd-MMM-yyyy')}"></span></h6>
             <h6 ><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAZJJREFUSEvFlu0xRUEMhp9bASqgA1SADnSAClABKqAEKkAHVIAO6IAKmNec3dm7sx/JXubszPlzb5InyWaTLJjpLGbiMgLeAjaB/cnpd0DfG/BpDcQKXgdOgWNA4Np5APTd9RywgC8nqODW8wScA681hRZYoOspSiswlzsBbkvKLbC83R4lJnpFeA0sL4860KvpfxXZXkf2AFD64ymBD4F7Q6RBVzVw0ZFX1e+mVV8CS0jPpXc8YNlShuTk78nB1mhTXUvEktcb36iBLXeb61rB0ot3nUcsr9Z6Oc6y5QHHdOfgbyM0TbW6mb78hNaa/v4I6DqX7ngHeBkA11RKmXgOPT6NeDawPPekeqkhVFKdD5RiqkPJW4vLcStRtFpcnuc0Aq4+J08D8YK/gDhaV2mZXnCzZcrYf0T9AejVxNVolbHoidg0FoPBWRYBwVUIN4aFoBX50OoTDKr1nTmGh/TUGqUztOylkSh6GdIwaC0J6kxab4sLXmrQst6Wpo5aYb7QK7o/X+g9FWySHYnYZLgn9AMPiEgfP/Q1PAAAAABJRU5ErkJggg=="/>End date: <span th:text="${#dates.format(e.getDueDate(), 'dd-MMM-yyyy')}"></span></h6>
-            <h6><span class="text-bg-danger"><a th:href="@{'/QAM/deleteEvent/?id='+ ${e.id}}" style="color: #dddddd" role="button"
+            <h6 style="display: flex!important;">
+                <span class="text-bg-danger"><a th:href="@{'/QAM/deleteEvent/?id='+ ${e.id}}" style="color: #dddddd" role="button"
                                                 aria-pressed="true">Delete Event</a></span>
-                <span class="text-bg-primary"><a th:href="@{'/admin/go_edit_Event/?id='+ ${e.id}}" style="color: #dddddd"
+
+                <span sec:authorize="hasAuthority('admin')" class="text-bg-primary"><a th:href="@{'/admin/go_edit_Event/?id='+ ${e.id}}" style="color: #dddddd"
                                                  role="button" aria-pressed="true">Edit Event</a></span>
+
             </h6>
             <hr>
         </div>

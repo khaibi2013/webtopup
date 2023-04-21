@@ -85,7 +85,9 @@ public class IdeaController {
 
 
     @PostMapping(value = "/user/create_idea")
-    public String createSector(@ModelAttribute("ideaForm") IdeaForm profileForm,@RequestParam("id") Long id, @RequestParam("files") MultipartFile[] multipartFiles) {
+    public String createSector(@ModelAttribute("ideaForm") IdeaForm profileForm,
+                               @RequestParam("id") Long id,
+                               @RequestParam("files") MultipartFile[] multipartFiles) {
 
 
 

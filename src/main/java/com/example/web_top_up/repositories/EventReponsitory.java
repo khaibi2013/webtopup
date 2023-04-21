@@ -13,8 +13,4 @@ public interface EventReponsitory extends JpaRepository<EventEntity,Long> {
     @Query(value = "SELECT c.name_event as name, date_format(c.create_at, '%M %d %Y') as createAt, count(c.id) AS counts FROM event_table c GROUP BY MONTH(c.create_at), YEAR(c.create_at)", nativeQuery = true)
     List<EventData> getDataEvent();
 
-
-
-
-
 }
